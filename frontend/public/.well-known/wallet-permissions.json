@@ -1,0 +1,13 @@
+{
+  "name": "Doge Wallet",
+  "domain": "doge.metanet.app",
+  "description": "Single-address Dogecoin wallet using BRC100 signatures.",
+  "protocols": [
+    {
+      "protocolID": [0, "dogecoin"],
+      "keyID": "1",
+      "description": "Derive and sign the Dogecoin wallet address."
+    }
+  ]
+}
+

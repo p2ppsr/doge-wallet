@@ -1,0 +1,19 @@
+{
+  "name": "Doge Wallet",
+  "short_name": "Doge Wallet",
+  "description": "A frontend-only Dogecoin wallet powered by BRC100 Metanet wallet signatures.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/assets/doge-wallet-hero.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
+
