@@ -24,6 +24,11 @@ import {
 } from './dogecoin'
 
 describe('dogecoin helpers', () => {
+  it('uses a restricted BRC100 security level for Dogecoin keys', () => {
+    expect(DOGE_PROTOCOL_ID).toEqual([1, 'dogecoin'])
+    expect(DOGE_KEY_ID).toBe('1')
+  })
+
   it('formats and parses DOGE amounts without floating point math', () => {
     expect(parseDogeToShibes('1')).toBe(100000000n)
     expect(parseDogeToShibes('0.01000000')).toBe(1000000n)

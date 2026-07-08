@@ -7,7 +7,7 @@ import {
   type WalletProtocol
 } from '@bsv/sdk'
 
-export const DOGE_PROTOCOL_ID: WalletProtocol = [0, 'dogecoin']
+export const DOGE_PROTOCOL_ID: WalletProtocol = [1, 'dogecoin']
 export const DOGE_KEY_ID = '1'
 export const DOGE_P2PKH_PREFIX = 0x1e
 export const DOGE_P2SH_PREFIX = 0x16
@@ -401,4 +401,3 @@ export const buildSignedP2pkhTransaction = async (params: {
   const txid = bytesToHex([...Hash.hash256(raw)].reverse())
   return { rawTx: bytesToHex(raw), txid, plan }
 }
-

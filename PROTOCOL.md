@@ -2,9 +2,11 @@
 
 ## Namespace
 
-- Protocol ID: `[0, "dogecoin"]`
+- Protocol ID: `[1, "dogecoin"]`
 - Key ID: `"1"`
 - Counterparty: `"self"`
+
+The first protocol element is the BRC100 security level. Doge Wallet uses level `1` so another app cannot request the same key through the wide-open level `0` namespace.
 
 ## Address Derivation
 
@@ -27,4 +29,3 @@ The resulting address is the wallet's single receive address.
 8. Broadcast the raw transaction.
 
 The app never exports or stores private key material.
-

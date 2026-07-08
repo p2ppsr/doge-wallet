@@ -8,7 +8,7 @@ Why? For the memes.
 
 - Derives one Dogecoin P2PKH address from BRC100 `getPublicKey`.
 - Signs Dogecoin sends through BRC100 `createSignature`.
-- Uses protocol ID `[0, "dogecoin"]` and key ID `"1"`.
+- Uses protocol ID `[1, "dogecoin"]` and key ID `"1"` so Dogecoin keys are not exposed at security level 0.
 - Reads balance, UTXOs, and recent transactions from BlockCypher's Dogecoin explorer API.
 - Broadcasts raw Dogecoin transactions through the explorer API.
 - Subscribes to BlockCypher WebSockets for live address activity.
@@ -84,4 +84,3 @@ See [PROTOCOL.md](./PROTOCOL.md).
 ## License
 
 [Open BSV License](./LICENSE.txt)
-
