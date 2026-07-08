@@ -22,8 +22,6 @@ import {
 } from 'lucide-react'
 import {
   DEFAULT_FEE_RATE_PER_KB,
-  DOGE_KEY_ID,
-  DOGE_PROTOCOL_ID,
   buildSignedP2pkhTransaction,
   decodeDogeAddress,
   deriveDogeIdentity,
@@ -90,12 +88,6 @@ const getSocketLabel = (status: SocketStatus): string => {
       return 'Idle'
   }
 }
-
-const networkFacts = [
-  { label: 'Protocol', value: `[${DOGE_PROTOCOL_ID[0]}, "${DOGE_PROTOCOL_ID[1]}"]` },
-  { label: 'Key ID', value: DOGE_KEY_ID },
-  { label: 'Explorer', value: 'BlockCypher DOGE' }
-]
 
 export default function App() {
   const walletRef = useRef<WalletInterface | null>(null)
@@ -370,14 +362,6 @@ export default function App() {
               <Copy aria-hidden />
             </button>
           </div>
-          <div className="fact-row">
-            {networkFacts.map(fact => (
-              <div key={fact.label}>
-                <span>{fact.label}</span>
-                <strong>{fact.value}</strong>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -454,7 +438,7 @@ export default function App() {
                 {identity == null ? (
                   <div className="qr-placeholder">Connect</div>
                 ) : (
-                  <QRCodeSVG value={identity.address} size={184} bgColor="#ffffff" fgColor="#17130b" />
+                  <QRCodeSVG value={identity.address} size={320} bgColor="#ffffff" fgColor="#17130b" />
                 )}
               </div>
               <p>

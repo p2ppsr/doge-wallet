@@ -24,9 +24,12 @@ export default defineConfig({
       use: { ...devices['iPad Pro 11'] }
     },
     {
+      name: 'wide-short',
+      use: { ...devices['Desktop Chrome'], viewport: { width: 1776, height: 760 } }
+    },
+    {
       name: 'mobile',
       use: { ...devices['Pixel 7'] }
     }
   ]
 })
-
