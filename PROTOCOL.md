@@ -29,3 +29,17 @@ The resulting address is the wallet's single receive address.
 8. Broadcast the raw transaction.
 
 The app never exports or stores private key material.
+
+## Cryptographic Audit
+
+`hashToDirectlySign` is already a 32-byte ECDSA message representative. The BSV SDK's real `ProtoWallet` passes it directly to `ECDSA.sign`; it does not hash it again. Doge Wallet therefore performs the Bitcoin-family double-SHA256 exactly once when producing the legacy sighash, then supplies that result directly.
+
+The test suite independently checks the implementation with `bitcoinjs-lib` and Noble secp256k1:
+
+- previous transaction IDs are reversed only for wire serialization;
+- version, output index, values, sequence, locktime, and sighash scope use Bitcoin-family little-endian wire encoding;
+- the 32-byte double-SHA256 digest is interpreted as a big-endian ECDSA integer;
+- returned DER signatures are low-S and independently verify;
+- a third SHA-256 or reversed digest fails verification.
+
+Before signing, the wallet also requires any explorer-provided source script to match the P2PKH script derived from the BRC100 public key. Every returned signature is verified locally before the transaction can be broadcast.

@@ -1,4 +1,6 @@
 import {
+  BigNumber,
+  ECDSA,
   Hash,
   PublicKey,
   Signature,
@@ -371,6 +373,12 @@ export const buildSignedP2pkhTransaction = async (params: {
   if (sourceAddress !== params.sourceAddress) {
     throw new Error('Source address does not match derived public key')
   }
+  const expectedSourceScript = bytesToHex(sourceScript)
+  for (const utxo of params.utxos) {
+    if (utxo.script != null && utxo.script.length > 0 && utxo.script.toLowerCase() !== expectedSourceScript.toLowerCase()) {
+      throw new Error(`Explorer script mismatch for ${utxo.txid}:${utxo.vout}`)
+    }
+  }
 
   const plan = planP2pkhSpend({
     utxos: params.utxos,
@@ -389,7 +397,10 @@ export const buildSignedP2pkhTransaction = async (params: {
       keyID: DOGE_KEY_ID,
       counterparty: 'self'
     })
-    Signature.fromDER(signature)
+    const parsedSignature = Signature.fromDER(signature)
+    if (!ECDSA.verify(new BigNumber(sighash), parsedSignature, publicKey)) {
+      throw new Error(`Wallet signature failed local verification for input ${inputIndex}`)
+    }
     const signatureWithScope = [...signature, SIGHASH_ALL]
     tx.inputs[inputIndex].scriptSig = [
       ...pushData(signatureWithScope),
